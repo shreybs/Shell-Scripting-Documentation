@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono|Share+Tech+Mono|VT323');
+
+body{
+    margin: 0px;
+    font-family: "Share Tech Mono", monospace, 'Lucida Sans';
+    font-size: 22px;
+    background-color: rgb(76, 132, 253);
+    color: rgb(0, 0, 0);
+
+}
+
+  #navbar{
+    position: fixed;
+    overflow: auto;
+    padding: 10px;
+    left: 0px;
+    top: 0px;
+    width: 20%;
+    height: 100%;
+    font-family: VT323,"Fira Mono",monospace,Verdana;
+    font-size: 30px;
+    background-color: rgb(15, 91, 255);
+    color: white;
+  }
+
+  #navbar header{
+    font-family: VT323, Georgia, Times;
+    font-size: 46px;
+    text-align: center;
+
+  }
+
+  #navbar ul{
+    height:88%;
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+
+  #navbar li{
+    color: #bde2f7;
+    border:1px solid;
+    border-bottom-width:0px;
+    padding:8px;
+    padding-left:45px;
+    list-style: none;
+    position:relative;
+    left:-50px;
+    width:100%;
+    
+  }
+  
+  #navbar a{
+    color: #bde2f7;
+    text-decoration:none;
+    cursor:pointer;
+  } 
+
+
+  .main-section{
+    font-family: VT323,monospace;
+    color: white;
+    font-size: 24px;
+    text-align: left;
+    position: relative;
+    margin-left:310px;
+    padding:20px;
+    margin-bottom:20px;
+  }
+
+  .main-section header{
+    font-size: 56px;
+  }
+
+  .code{
+    display:block;
+    text-align: left;
+    white-space: pre;
+    position: relative;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1;
+    background-color: #061388;
+    color: white;
+    font-family: VT323,"Fira Mono",monospace;
+    padding: 5px;
+    border-radius: 5px;
+
+  }
+
+  .code-inline{
+    padding: 2px;
+    background-color: #061388;
+    color: white;
+    font-family: VT323,"Fira Mono",monospace;
+    border-radius: 5px;
+    text-align: left;
+
+  }
+
+  @media screen and (max-width: 600px){
+    #navbar ul{
+      border:1px solid;
+      height:800px;
+    }
+
+    #navbar{
+      position:absolute;
+      top:0;
+      padding:0;
+      margin: 0;
+      width:100%;
+      max-height:512px;
+      border:none;
+      z-index:1;
+      border-bottom:2px solid;
+    }
+
+    #main-doc{
+      position: relative;
+      top: 256px;
+      margin-left:0px;
+      margin-top:270px;
+    }
+
+    .main-section{
+      font-family: VT323,monospace;
+      color: white;
+      font-size: 24px;
+      text-align: left;
+      position: relative;
+      margin-left:5px;
+      padding:20px;
+    }
+
+    code{
+      margin-left:-20px;
+      width:100%;
+      padding:15px;
+      padding-left:10px;
+      padding-right:45px;
+      min-width:233px;
+    }
+  }

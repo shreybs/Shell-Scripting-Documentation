@@ -1,0 +1,311 @@
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<body>
+    <nav id="navbar">
+        <header><p>Shell Scripting Handbook</p></header>
+        <br>
+
+        <ul>
+            <a class="nav-link" href="#Introduction" rel="Internal"><li>Introduction</li></a>
+            <a class="nav-link" href="#Understanding_Shell" rel="Internal"><li>Understanding Shell</li></a>
+            <a class="nav-link" href="#Basics_of_Shell_programming" rel="Internal"><li>Basics of Shell Programming</li></a>
+            <a class="nav-link" href="#Variables" rel="Internal"><li>Variables</li></a>
+            <a class="nav-link" href="#Escape_Characters" rel="Internal"><li>Escape Characters</li></a>
+            <a class="nav-link" href="#Wildcards" rel="Internal"><li>Wildcards</li></a>
+            <a class="nav-link" href="#Loops" rel="Internal"><li>Loops</li></a>
+            <a class="nav-link" href="#Pipes" rel="Internal"><li>Pipes</li></a>
+            <a class="nav-link" href="#Functions" rel="Internal"><li>Functions</li></a>
+        </ul>
+
+    <p style="font-size: 20px; color: rgb(255, 255, 255); text-align: center;">This is strictly an educational project made by Shreyas BS for the FreeCodeCamp Responsive Web Design Certification.</p>   
+    </nav>
+    <main id="main-doc">
+    <section class="main-section" id="Introduction">
+        <header>
+            Introduction
+        </header>
+        <article>
+        <p>Unix uses shells to accept commands given by the user, there are quite a few different shells available. 
+            The most commonly used shells are SH(Bourne SHell) CSH(C SHell) and KSH(Korn SHell), most of the other shells you encounter will be variants of these shells and will share the same syntax,
+            KSH is based on SH and so is BASH(Bourne again shell). 
+            TCSH(Extended C SHell) is based on CSH.
+        </p>
+
+        <p>
+            The various shells all have built in functions which allow for the creation of shell scripts, that is, the stringing together 
+            of shell commands and constructs to automate what
+            can be automated in order to make life easier for the user.
+        </p>
+        <p>
+            With all these different shells available, what shell should we script in? That is debatable. For the purpose of this tutorial we will be using SH because it is practically guaranteed to be available on most
+            Unix systems you will encounter or be supported by the SH based shells. Your default shell may not be SH. Fortunately we do not have to be using a specific shell in order to 
+            exploit its features because we can specify the shell we want to interpret our shell 
+            script within the script itself by including the following in the first line :
+        </p>
+        <code class="code">#!/bin/bash</code></article>
+    </section>
+    <section class="main-section" id="Understanding_Shell">
+        <header> Understanding Shell</header><article>
+        <p>The main terms to be familiar when working with shell scripting are:</p> 
+        <ul>
+            <li><p><strong>Shell:</strong> A Command-Line Interpretor that connects a user to Operating System and allows to execute the commands or by creating text script.</p></li>
+            <li><p><strong>Process:</strong> Any task that a user run in the system is called a process. A process is little more complex than just a task.</p></li>
+            <li><p><strong>File:</strong> It resides on hard disk (hdd) and contains data owned by a user.</p></li>
+            <li><p><strong>X Windows:</strong> A mode of Linux where screen (monitor) can be split in small “parts” called windows, that allow a user to do several things at the same time and/or switch from one task to another easily and view graphics in a nice way.</p></li>
+            <li><p><strong>Terminal:</strong> A monitor that has only the capability of displaying text stuff, no graphics or a very basic graphics display.</p></li>
+            <li><p><strong>Shell:</strong> A Command-Line Interpretor that connects a user to Operating System and allows to execute the commands or by creating text script.</p></li>
+            <li><p><strong>Session:</strong> Time between logging on and logging out of the system.</p></li>
+        </ul></article>
+    </section>
+    <section class="main-section" id="Basics_of_Shell_programming">
+        <header>Basics of Shell programming</header>
+        <article>
+            <p>To get a Linux shell, you need to start a terminal.
+ 
+                    To see what shell you have, run: <code class="code-inline">echo $SHELL</code>.
+                     
+                    In Linux, the dollar sign ($) stands for a shell variable.
+                     
+                    The ‘echo‘ command just returns whatever you type in.
+                     
+                    The pipeline instruction (|) comes to rescue, when chaining several commands.
+                     
+                    Linux commands have their own syntax, Linux won’t forgive you whatsoever is the mistakes. If you get a command wrong, you won’t flunk or damage anything, but it won’t work.
+                     
+                    <code class="code-inline">#!/bin/sh</code> – It is called shebang. It is written at the top of a shell script and it passes the instruction to the program /bin/sh.
+        </article>
+    </section>
+    <section class="main-section" id="Variables">
+        <header>Variables</header>
+        <article>
+                <p>You can use variables as in any programming languages. There are no data types. A variable in bash can contain a number, a character, a string of characters.
+
+                You have no need to declare a variable, just assigning a value to its reference will create it.</p>
+                
+                <p>Hello World! using variables</p>
+                    <code class="code">  
+#!/bin/bash          
+STR="Hello World!"
+echo $STR    
+                    </code>         
+                <p>Line 2 creates a variable called STR and assigns the string "Hello World!" to it. Then the VALUE of this variable is retrieved by putting the '$' in at the beginning. Please notice (try it!) that if you don't use the '$' sign, the output of the program will be different, and probably not what you want it to be.</p>
+                
+                <p>A very simple backup script (little bit better)</p>
+<code class="code">
+#!/bin/bash         
+OF=/var/my-backup-$(date +%Y%m%d).tg
+tar -cZf $OF /home/me/</code> 
+                           
+                <p>This script introduces another thing. First of all, you should be familiarized with the variable creation and assignation on line 2. Notice the expression '$(date +%Y%m%d)'. If you run the script you'll notice that it runs the command inside the parenthesis, capturing its output.
+                
+                Notice that in this script, the output filename will be different every day, due to the format switch to the date command(+%Y%m%d). You can change this by specifying a different format.</p>
+                
+                <p>Some more examples:</p>
+                <code class="code">
+echo ls
+echo $(ls)
+                </code>
+                <p>
+                Local variables can be created by using the keyword local.</p>
+                
+            <code class="code"> 
+    #!/bin/bash
+    HELLO=Hello 
+    function hello {
+            local HELLO=World
+            echo $HELLO
+    }
+    echo $HELLO
+    hello
+    echo $HELLO
+                </code>
+                <p>This example should be enought to show how to use a local variable.</p>
+        </article>
+    </section>
+    <section class="main-section" id="Escape_Characters">
+        <header>Escape Characters</header>
+        <article>
+               <p>Certain characters are significant to the shell; we have seen, for example, that the use of double quotes (") characters affect how spaces and TAB characters are treated, for example:</p>
+               <code class="code">
+$ echo Hello       World
+Hello World
+$ echo "Hello       World"
+Hello     World
+               </code>
+            <p>Here are the backslash-escape special characters that have meaning to bash:</p>
+            <code class="code">
+\a     an ASCII bell character (07)
+\d     the date  in  "Weekday  Month  Date"  format
+       (e.g., "Tue May 26")
+\e     an ASCII escape character (033)
+\h     the hostname up to the first `.'
+\H     the hostname
+\j     the  number of jobs currently managed by the shell
+\l     the basename of the shell's terminal device name
+\n     newline
+\r     carriage return
+\s     the  name  of  the shell, the basename of $0
+       (the portion following the final slash)
+\t     the current time in 24-hour HH:MM:SS format
+\T     the current time in 12-hour HH:MM:SS format
+\@     the current time in 12-hour am/pm format
+\u     the username of the current user
+\v     the version of bash (e.g., 2.00)
+\V     the release of bash,  version  +  patchlevel
+       (e.g., 2.00.0)
+\w     the current working directory
+\W     the  basename  of the current working direcory
+\!     the history number of this command
+\#     the command number of this command
+\$     if the effective UID is 0, a #, otherwise a $
+\nnn   the character corresponding to the octal number nnn
+\\     a backslash
+\[     begin a sequence of non-printing characters,
+       which could be used to embed a terminal control
+       sequence into the prompt
+\]     end a sequence of non-printing characters
+            </code>
+        </article>
+    </section>
+    <section class="main-section" id="Wildcards">
+        <header>Wildcards</header>
+        <article>
+                <p>Wildcards are really nothing new if you have used Unix at all before. 
+                It is not necessarily obvious how they are useful in shell scripts though. This section is really just to get the old grey cells thinking how things look when you're in a shell script - predicting what the effect of using different syntaxes are. This will be used later on, particularly in the Loops section. 
+                Think first how you would copy all the files from <code class="code-inline">/tmp/a into /tmp/b</code>. All the .txt files? All the .html files? </p>
+                <p>Hopefully you will have come up with:
+<code class="code">
+$ cp /tmp/a/* /tmp/b/
+$ cp /tmp/a/*.txt /tmp/b/
+$ cp /tmp/a/*.html /tmp/b/
+</code>
+                <p>Now how would you list the files in /tmp/a/ without using ls /tmp/a/? 
+                How about echo /tmp/a/*? What are the two key differences between this and the ls output? How can this be useful? Or a hinderance? 
+                How could you rename all .txt files to .bak? Note that
+                <code class="code-inline"> mv *.txt *.bak</code>
+                will not have the desired effect; think about how this gets expanded by the shell before it is passed to mv. </p>
+        </article>
+    </section>
+    <section class="main-section" id="Loops">
+        <header>Loops</header>
+        <article>
+                <p><ul><li>The for loop is a little bit different from other programming languages. Basically, it let's you iterate over a series of 'words' within a string.</li>
+                
+                <li>The while executes a piece of code if the control expression is true, and only stops when it is false (or a explicit break is found within the executed code.</li>
+                
+                <li>The until loop is almost equal to the while loop, except that the code is executed while the control expression evaluates to false.</li>
+                </ul>
+                If you suspect that while and until are very similar you are right.</p>
+<p>For sample</p><code class="code">
+#!/bin/bash
+for i in $( ls ); do
+   echo item: $i
+done
+</code>        
+                <p>On the second line, we declare i to be the variable that will take the different values contained in $( ls ).
+                
+                The third line could be longer if needed, or there could be more lines before the done (4).
+                
+                'done' (4) indicates that the code that used the value of $i has finished and $i can take a new value.
+                
+                This script has very little sense, but a more useful way to use the for loop would be to use it to match only certain files on the previous example</p>
+                
+                        
+                 <p>While sample</p>
+<code class="code">
+#!/bin/bash 
+COUNTER=0
+while [  $COUNTER -lt 10 ]; do
+    echo The counter is $COUNTER
+    let COUNTER=COUNTER+1 
+done
+</code>
+                <p>This script 'emulates' the well known (C, Pascal, perl, etc) 'for' structure</p>
+                
+                <p>Until sample
+<code class="code">
+#!/bin/bash 
+COUNTER=20
+until [  $COUNTER -lt 10 ]; do
+    echo COUNTER $COUNTER
+    let COUNTER-=1
+done
+</code>
+        </article>
+    </section>
+    <section class="main-section" id="Pipes">
+        <header>Pipes</header>
+        <article>
+                <p>Pipes ("|") let you use (very simple, I insist) the output of a program as the input of another one</p>
+
+                <p>Sample: simple pipe with sed
+                This is very simple way to use pipes.</p> 
+<code class="code">          
+ls -l | sed -e "s/[aeio]/u/g"   
+</code>                         
+                <p>Here, the following happens: first the command ls -l is executed, and it's output, instead of being printed, is sent (piped) to the sed program, which in turn, prints what it has to.</p>
+                <p>Sample: an alternative to <code class="code-inline">ls -l *.txt</code></p>
+                <p>Probably, this is a more difficult way to do ls -l *.txt, but it is here for illustrating pipes, not for solving such listing dilema.</p>
+<code class="code">            
+ls -l | grep "\.txt$"
+</code> 
+                        
+                <p>Here, the output of the program ls -l is sent to the grep program, which, in turn, will print lines which match the regex <code class="code-inline">"\.txt$"</code>.</p>
+        </article>
+    </section>
+    <section class="main-section" id="Functions">
+        <header>Functions</header>
+        <article>
+                <p>As in almost any programming language, you can use functions to group pieces of code in a more logical way or practice the divine art of recursion.
+
+                Declaring a function is just a matter of writing function my_func { my_code }.
+                
+                Calling a function is just like calling another program, you just write its name.
+                </p>
+                <p> Functions sample
+<code class="code">
+ #!/bin/bash 
+function quit {
+    exit
+}
+function hello {
+    echo Hello!
+}
+hello
+quit
+echo foo 
+</code>
+                <p>Lines 2-4 contain the 'quit' function. Lines 5-7 contain the 'hello' function If you are not absolutely sure about what this script does, please try it!.
+                
+                Notice that a functions don't need to be declared in any specific order.
+                
+                When running the script you'll notice that first: the function 'hello' is called, second the 'quit' function, and the program never reaches line 10.</p>
+                
+                 <p>Functions with parameters sample</p>
+<code class="code">
+ #!/bin/bash 
+function quit {
+   exit
+}  
+function e {
+    echo $1 
+}  
+e Hello
+e World
+quit
+echo foo 
+</code>
+                           
+                <p>This script is almost identically to the previous one. The main difference is the funcion 'e'. This function, prints the first argument it receives. Arguments, within funtions, are treated in the same manner as arguments given to the script.</p>
+        </article>
+    </section>
+
+
+
+
+
+
+
+</main>
+</body>
